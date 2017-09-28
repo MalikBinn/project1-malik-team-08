@@ -8,11 +8,15 @@ public:
 	PriceListItem();
 	PriceListItem(const string &itemName, const string &code, double price, bool taxable);
 	string getItemName();
-	string getCode();
+	string getCode()const;
 	double getPrice();
 	bool isTaxable();
 private:
 	// any private member variables and methods go here
 	// TO BE COMPLETED
 
+	string itemName;
+	string code;
+	double price;
+	bool taxable;
 };

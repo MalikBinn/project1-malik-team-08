@@ -30,15 +30,39 @@ void PriceList::createPriceListFromDatafile(string filename) {
 // return true only if the code is valid
 bool PriceList::isValid(string code) const {
 	// TO BE COMPLETED
+	int i;
+	for(i =0;i<currentIndex;i++)
+	{
+		if(itemsList[i]->getCode()==code)
+			break;
+
+	}
+	if(i<currentIndex)
+		return true;
+	else
+		return false;
 
 }
 
 // return price, item name, taxable? as an ItemPrice object; throw exception if code is not found
 PriceListItem PriceList::getItem(string code) const {
 	// TO BE COMPLETED
+	int i;
+	for(i =0;i<currentIndex;i++)
+	{
+		if(itemsList[i]->getCode()==code)
+			break;
+
+	}
+	return *itemsList[i];
 }
 
 // add to the price list information about a new item
 void PriceList::addEntry(string itemName, string code, double price, bool taxable) {
 	// TO BE COMPLETED
+	if(currentIndex<999999)
+	{
+		itemsList[currentIndex] = new PriceListItem(itemName, code, price, taxable);
+		currentIndex++;
+	}
 }

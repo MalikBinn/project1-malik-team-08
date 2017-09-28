@@ -16,7 +16,7 @@ private:
 	const PriceList *priceList;
 	double taxRate;
 	string codes[100];
-	int quantities[100];
+	double quantities[100];
 	int count = 0;
 	// TO BE COMPLETED
 

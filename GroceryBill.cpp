@@ -16,9 +16,14 @@ GroceryBill::GroceryBill(const PriceList *priceList, double taxRate) {
 
 void GroceryBill::scanItem(string scanCode, double quantity) {
 	// To be completed
+	if(priceList->isValid(scanCode))
+	{
 	codes[count] = scanCode;
 	quantities[count] = quantity;
 	count ++;
+	}
+	else{
+	throw std::invalid_argument( "invalid input" );}
 }
 
 // Scan multiple codes and quantities from the given text file
@@ -33,7 +38,7 @@ void GroceryBill::scanItemsFromFile(string filename) {
 	if (myfile.is_open()) {
 		cout << "Successfully opened file " << filename << endl;
 		string code;
-		int quantity;
+		double quantity;
 		while (myfile >> code >> quantity) {
 			// cout << code << " " << taxable << endl;
 			scanItem(code, quantity);
@@ -54,13 +59,13 @@ double GroceryBill::getTotal() {
 		PriceListItem p = priceList->getItem(codes[i]);
 		double temp = p.getPrice();
 		if(p.isTaxable())
-			temp = temp * this->taxRate;
-		total = temp * quantities[i];
+			temp = temp + (temp * this->taxRate)/100;
+		total += temp * quantities[i];
 	}
 	return total;
 }
 
-// Print the bill to cout. Each line contains the name of an item, total price, and the letter "T" if tax was addded. 
+// Print the bill to cout. Each line contains the name of an item, total price, and the letter "T" if tax was addded.
 // The last line shows the total.
 // An example:
 //Plastic_Wrap	1.60547 T

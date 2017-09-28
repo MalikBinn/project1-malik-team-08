@@ -83,6 +83,6 @@ void GroceryBill::printBill() {
 		PriceListItem p = priceList->getItem(codes[i]);
 		cout<<p.getItemName()<<"\t"<<p.getPrice()<<endl;
 	}
-	cout<<total<<"\t"<<getTotal()<<endl;
+	cout<<"TOTAL\t"<<getTotal()<<endl;
 }
 
